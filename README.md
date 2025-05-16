@@ -1,9 +1,9 @@
 
 ### Игра с гоблинами
 
-[![Build status](https://ci.appveyor.com/api/projects/status/xgiulvvxb92yxliy?svg=true)](https://ci.appveyor.com/project/OlikPr/ahj-env)
+[![Build status](https://ci.appveyor.com/api/projects/status/77hslqnd2t2xhpct?svg=true)](https://ci.appveyor.com/project/OlikPr/ahj-events-new)
 
-deployment: https://olikpr.github.io/ahj-events/
+deployment: https://olikpr.github.io/ahj-events-new/
 
 ![](./src/img/GracefulMiniatureBustard-small.gif)
 
