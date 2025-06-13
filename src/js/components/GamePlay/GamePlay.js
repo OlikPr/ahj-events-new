@@ -68,12 +68,13 @@ export default class GamePlay {
     for (const cell of this.cells) {
       cell.innerHTML = '';
     }
-
+    if (position !== undefined && position >= 0 && position < this.cells.length) {
     const cellEl = this.boardEl.children[position];
     const charEl = document.createElement('div');
     charEl.classList.add('character', 'generic');
 
     cellEl.appendChild(charEl);
+    }
   }
 
   addCellEnterListener(callback) {
