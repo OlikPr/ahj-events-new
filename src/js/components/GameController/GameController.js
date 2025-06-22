@@ -7,6 +7,7 @@ export default class GameController {
     this.gamePlay = gamePlay;
     this.indexSelect = null;
     this.clickCounter = null;
+    this.currentGoblinPosition = null;
     this.onCellClick = this.onCellClick.bind(this);
     this.onCellEnter = this.onCellEnter.bind(this);
     this.onCellLeave = this.onCellLeave.bind(this);
@@ -47,7 +48,17 @@ export default class GameController {
 
   showCharacter() {
     this.timerId = setInterval(() => {
+      if (this.currentGoblinPosition !== null) {
+        this.clickCounter.incrementMiss();
+        if (this.clickCounter.getMissCount() >= 5) {
+          this.gamePlay.showModalMessage('Вы проиграли!', '129335');
+          this.reset();
+          return;
+        }
+      }
+
       const position = createPosition(this.gamePlay.boardSize);
+      this.currentGoblinPosition = position;
       this.gamePlay.redrawPositions(position);
     }, 1000);
 
@@ -64,6 +75,7 @@ export default class GameController {
 
     if (isGoblin) {
       this.clickCounter.incrementHit();
+      this.currentGoblinPosition = null;
       this.resetTimer(); // fix сбрасываем интервал
       this.showCharacter(); // fix перезапускаем интервал
 

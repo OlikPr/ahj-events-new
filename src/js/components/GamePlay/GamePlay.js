@@ -14,7 +14,7 @@ export default class GamePlay {
     this.cellLeaveListeners = [];
     this.isModal = false;
     this.missCounter = 0;
-    this.maxMisses = 5; 
+    this.maxMisses = 5;
     this.gameActive = true;
 
     this.initModalListener();
@@ -75,16 +75,16 @@ export default class GamePlay {
     for (const cell of this.cells) {
       cell.innerHTML = '';
     }
-
+    if (position !== undefined && position >= 0 && position < this.cells.length) {
     const cellEl = this.boardEl.children[position];
     const charEl = document.createElement('div');
     charEl.classList.add('character', 'generic');
 
     cellEl.append(charEl);
-    this.missCounter++;
+    this.missCounter + 1;
     if (this.missCounter >= this.maxMisses) {
       this.gameActive = false;
-      this.showModalMessage('You lose!', '128546'); 
+      this.showModalMessage('You lose!', '128546');
     }
   }
 
@@ -147,19 +147,11 @@ export default class GamePlay {
   showModalMessage(message, unicode) {
     if (!this.isModal) {
       this.isModal = true;
-      this.gameActive = false; 
+      this.gameActive = false;
       this.showModal(message, unicode);
     }
   }
-  resetGame() {
-    this.missCounter = 0;
-    this.gameActive = true;
-    this.isModal = false;
-    for (const cell of this.cells) {
-      cell.innerHTML = '';
-    }
-  }
-  
+
   showModal(message, unicode) {
     const modal = new Modal({
       title: message,
@@ -176,5 +168,14 @@ export default class GamePlay {
     this.currentModal = modal;
 
     modal.show();
+  }
+  
+  resetGame() {
+    this.missCounter = 0;
+    this.gameActive = true;
+    this.isModal = false;
+    for (const cell of this.cells) {
+      cell.innerHTML = '';
+    }
   }
 }

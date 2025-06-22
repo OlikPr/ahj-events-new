@@ -61,7 +61,11 @@ export default class Modal {
     this.elemModal.innerHTML = modalHTML;
     document.body.append(this.elemModal);
   }
-
+  setupEventListeners() {
+    this.elemModal.removeEventListener('click', this.handlerCloseModal);
+    this.handlerCloseModalBound = this.handlerCloseModal.bind(this);
+    this.elemModal.addEventListener('click', this.handlerCloseModalBound);
+  }
   show() {
     if (!this.destroyed && !this.hiding) {
       this.elemModal.classList.add('modal__show');
@@ -90,10 +94,10 @@ export default class Modal {
     if (this.elemModal.parentElement) {
       this.elemModal.parentElement.removeChild(this.elemModal);
     }
-    this.elemModal.removeEventListener(
-      'click',
-      this.handlerCloseModal.bind(this),
-    );
+    if (this.handlerCloseModalBound) {
+      this.elemModal.removeEventListener('click', this.handlerCloseModalBound);
+    }
+    this.destroyed = true;
   }
 
   setContent(html) {
