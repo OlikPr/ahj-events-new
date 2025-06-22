@@ -141,7 +141,7 @@ export default class GamePlay {
   }
 
   showModalMessage(message, unicode) {
-    if (!this.isModal) return;
+    if (this.isModal) return;
       this.isModal = true;
       this.gameActive = false;
       this.showModal(message, unicode);
@@ -179,10 +179,11 @@ export default class GamePlay {
   resetGame() {
     this.missCounter = 0;
     this.gameActive = true;
+    this.isModal = false;
     for (const cell of this.cells) {
       cell.innerHTML = '';
     }
-    this.isModal = false;
+    
     if (this.currentModal) {
       this.currentModal.hide();
       this.currentModal = null;
