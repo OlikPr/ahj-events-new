@@ -87,11 +87,20 @@ export default class GamePlay {
       this.showModalMessage('You lose!', '128546');
     }
   }
-
+  }
+  
   addCellEnterListener(callback) {
     this.cellEnterListeners.push(callback);
   }
-  
+
+  addCellLeaveListener(callback) {
+    this.cellLeaveListeners.push(callback);
+  }
+
+  addCellClickListener(callback) {
+    this.cellClickListeners.push(callback);
+  }
+
   onCellEnter(event) {
     event.preventDefault();
     const index = this.cells.indexOf(event.currentTarget);
