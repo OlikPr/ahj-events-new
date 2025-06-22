@@ -169,7 +169,7 @@ export default class GamePlay {
 
     modal.show();
   }
-  
+
   resetGame() {
     this.missCounter = 0;
     this.gameActive = true;
@@ -178,4 +178,5 @@ export default class GamePlay {
       cell.innerHTML = '';
     }
   }
+}
 }
