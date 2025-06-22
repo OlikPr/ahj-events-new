@@ -9,3 +9,8 @@ gamePlay.bindToDOM(document.querySelector('#game-container'));
 
 const gameCtrl = new GameController(gamePlay);
 gameCtrl.init();
+
+const gameController = new GameController(gamePlay);
+gamePlay.onRestart = () => {
+  gameController.resetGame();
+};

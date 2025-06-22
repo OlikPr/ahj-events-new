@@ -158,20 +158,31 @@ export default class GamePlay {
           text: 'Close',
           handler: 'modalHandlerCancel',
         },
+        {
+          class: 'btn btn__confirm',
+          text: 'Новая игра',
+          handler: 'modalHandlerConfirm',
+        },
       ],
     });
 
     this.currentModal = modal;
 
     modal.show();
+
+    document.querySelector('.btn__confirm').addEventListener('click', () => {
+      this.resetGame();
+      modal.hide();
+      if (this.onRestart) this.onRestart();
+    });
   }
 
   resetGame() {
     this.missCounter = 0;
     this.gameActive = true;
-    this.isModal = false;
     for (const cell of this.cells) {
       cell.innerHTML = '';
     }
+    this.isModal = false;
   }
 }
