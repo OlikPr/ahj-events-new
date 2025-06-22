@@ -61,7 +61,7 @@ export default class Modal {
     this.elemModal.innerHTML = modalHTML;
     document.body.append(this.elemModal);
   }
-  
+
   setupEventListeners() {
     this.elemModal.removeEventListener('click', this.handlerCloseModal);
     this.handlerCloseModalBound = this.handlerCloseModal.bind(this);
