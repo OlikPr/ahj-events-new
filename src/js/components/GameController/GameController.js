@@ -18,6 +18,7 @@ export default class GameController {
     this.events();
     this.gamePlay.drawUi('prairie');
     this.clickCounter = new ClickCounter(document.querySelector('#game-container'));
+    this.gamePlay.onRestart = () => this.reset();
     this.showCharacter();
   }
 
@@ -52,12 +53,16 @@ export default class GameController {
     clearInterval(this.timerId);
     }
     this.timerId = setInterval(() => {
-      if (!this.isGameActive) return;
+      if (!this.isGameActive) {
+        clearInterval(this.timerId);
+        return;
+      } 
       if (this.currentGoblinPosition !== null) {
         this.clickCounter.incrementMiss();
         if (this.clickCounter.getMissCount() >= 5) {
           this.gamePlay.showModalMessage('Вы проиграли!', '129335');
-          this.reset();
+          this.isGameActive = false;
+          clearInterval(this.timerId);
           return;
         }
       }
