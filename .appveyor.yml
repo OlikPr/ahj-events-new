@@ -22,9 +22,9 @@ test_script:
 
 deploy_script:  # скрипт развёртывания
   - git config --global credential.helper store
-  - git config --global user.name AppVeyor
-  - git config --global user.email ci@appveyor.com
-  - echo "https://$GITHUB_TOKEN:x-oauth-basic@github.com" > "$HOME/.git-credentials"
-  - npx gh-pages -d dist -u "appveyor-bot <ci@appveyor>"
+  - git config --global user.name OlikPr
+  - git config --global user.email prikhodkolik15@gmail.com
+  - echo "https://$GITHUB_TOKEN:x-oauth-basic@github.com">"$HOME/.git-credential
+  - npx push-dir --dir=dist --branch=gh-pages --force --verbose
 
 
