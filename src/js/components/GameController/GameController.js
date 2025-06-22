@@ -103,5 +103,8 @@ export default class GameController {
   reset() {
     this.isGameActive = true;
     this.clickCounter.reset();
+    this.currentGoblinPosition = null;
+    this.gamePlay.resetGame();
+    this.showCharacter();
   }
 }

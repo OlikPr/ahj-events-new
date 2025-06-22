@@ -184,5 +184,9 @@ export default class GamePlay {
       cell.innerHTML = '';
     }
     this.isModal = false;
+    if (this.currentModal) {
+      this.currentModal.hide();
+      this.currentModal = null;
+    }
   }
 }
