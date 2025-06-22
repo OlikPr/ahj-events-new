@@ -59,7 +59,7 @@ export default class Modal {
     }
     modalHTML = modalHTML.replace('{{footer}}', modalFooterHTML);
     this.elemModal.innerHTML = modalHTML;
-    document.body.appendChild(this.elemModal);
+    document.body.append(this.elemModal);
   }
 
   show() {

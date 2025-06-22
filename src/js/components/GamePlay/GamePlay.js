@@ -13,6 +13,9 @@ export default class GamePlay {
     this.cellEnterListeners = [];
     this.cellLeaveListeners = [];
     this.isModal = false;
+    this.missCounter = 0;
+    this.maxMisses = 5; 
+    this.gameActive = true;
 
     this.initModalListener();
   }
@@ -58,13 +61,17 @@ export default class GamePlay {
       cellEl.addEventListener('mouseenter', (event) => this.onCellEnter(event));
       cellEl.addEventListener('mouseleave', (event) => this.onCellLeave(event));
       cellEl.addEventListener('click', (event) => this.onCellClick(event));
-      this.boardEl.appendChild(cellEl);
+      this.boardEl.append(cellEl);
     }
 
     this.cells = Array.from(this.boardEl.children);
   }
 
   redrawPositions(position) {
+    if (!this.gameActive) {
+      return;
+    }
+
     for (const cell of this.cells) {
       cell.innerHTML = '';
     }
@@ -73,7 +80,12 @@ export default class GamePlay {
     const charEl = document.createElement('div');
     charEl.classList.add('character', 'generic');
 
-    cellEl.appendChild(charEl);
+    cellEl.append(charEl);
+    this.missCounter++;
+    if (this.missCounter >= this.maxMisses) {
+      this.gameActive = false;
+      this.showModalMessage('You lose!', '128546'); 
+    }
   }
 
   addCellEnterListener(callback) {
@@ -103,6 +115,7 @@ export default class GamePlay {
   onCellClick(event) {
     const index = this.cells.indexOf(event.currentTarget);
     this.cellClickListeners.forEach((o) => o.call(null, index));
+    this.missCounter = 0;
   }
 
   selectCell(index, color = 'yellow') {
@@ -134,10 +147,19 @@ export default class GamePlay {
   showModalMessage(message, unicode) {
     if (!this.isModal) {
       this.isModal = true;
+      this.gameActive = false; 
       this.showModal(message, unicode);
     }
   }
-
+  resetGame() {
+    this.missCounter = 0;
+    this.gameActive = true;
+    this.isModal = false;
+    for (const cell of this.cells) {
+      cell.innerHTML = '';
+    }
+  }
+  
   showModal(message, unicode) {
     const modal = new Modal({
       title: message,
