@@ -141,11 +141,10 @@ export default class GamePlay {
   }
 
   showModalMessage(message, unicode) {
-    if (!this.isModal) {
+    if (!this.isModal) return;
       this.isModal = true;
       this.gameActive = false;
       this.showModal(message, unicode);
-    }
   }
 
   showModal(message, unicode) {
