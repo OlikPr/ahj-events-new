@@ -76,17 +76,12 @@ export default class GamePlay {
       cell.innerHTML = '';
     }
     if (position !== undefined && position >= 0 && position < this.cells.length) {
-    const cellEl = this.boardEl.children[position];
-    const charEl = document.createElement('div');
-    charEl.classList.add('character', 'generic');
+      const cellEl = this.boardEl.children[position];
+      const charEl = document.createElement('div');
+      charEl.classList.add('character', 'generic');
 
-    cellEl.append(charEl);
-    this.missCounter + 1;
-    if (this.missCounter >= this.maxMisses) {
-      this.gameActive = false;
-      this.showModalMessage('You lose!', '128546');
+      cellEl.append(charEl);
     }
-  }
   }
 
   addCellEnterListener(callback) {
@@ -180,4 +175,3 @@ export default class GamePlay {
     }
   }
 }
-

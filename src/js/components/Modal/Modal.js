@@ -61,11 +61,13 @@ export default class Modal {
     this.elemModal.innerHTML = modalHTML;
     document.body.append(this.elemModal);
   }
+  
   setupEventListeners() {
     this.elemModal.removeEventListener('click', this.handlerCloseModal);
     this.handlerCloseModalBound = this.handlerCloseModal.bind(this);
     this.elemModal.addEventListener('click', this.handlerCloseModalBound);
   }
+
   show() {
     if (!this.destroyed && !this.hiding) {
       this.elemModal.classList.add('modal__show');
