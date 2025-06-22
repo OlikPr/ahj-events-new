@@ -141,13 +141,18 @@ export default class GamePlay {
   }
 
   showModalMessage(message, unicode) {
-    if (this.isModal) return;
+    if (!this.isModal) return;
       this.isModal = true;
       this.gameActive = false;
       this.showModal(message, unicode);
   }
 
   showModal(message, unicode) {
+    document.querySelector('.btn__confirm').addEventListener('click', () => {
+      this.resetGame();
+      modal.hide();
+      if (this.onRestart) this.onRestart();
+    });
     const modal = new Modal({
       title: message,
       content: `&#${unicode}`,
@@ -183,7 +188,7 @@ export default class GamePlay {
     for (const cell of this.cells) {
       cell.innerHTML = '';
     }
-    
+
     if (this.currentModal) {
       this.currentModal.hide();
       this.currentModal = null;
