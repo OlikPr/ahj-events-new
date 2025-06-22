@@ -88,7 +88,7 @@ export default class GamePlay {
     }
   }
   }
-  
+
   addCellEnterListener(callback) {
     this.cellEnterListeners.push(callback);
   }
@@ -180,4 +180,4 @@ export default class GamePlay {
     }
   }
 }
-}
+
