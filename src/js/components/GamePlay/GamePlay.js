@@ -12,7 +12,7 @@ export default class GamePlay {
     this.cellClickListeners = [];
     this.cellEnterListeners = [];
     this.cellLeaveListeners = [];
-    this.isModal = false;
+    this.isModal = true;
     this.missCounter = 0;
     this.maxMisses = 5;
     this.gameActive = true;
@@ -148,11 +148,6 @@ export default class GamePlay {
   }
 
   showModal(message, unicode) {
-    document.querySelector('.btn__confirm').addEventListener('click', () => {
-      this.resetGame();
-      modal.hide();
-      if (this.onRestart) this.onRestart();
-    });
     const modal = new Modal({
       title: message,
       content: `&#${unicode}`,
@@ -170,28 +165,29 @@ export default class GamePlay {
       ],
     });
 
+    document.querySelector('.btn__confirm').addEventListener('click', () => {
+      // this.resetGame();
+      modal.hide();
+      window.location.reload();
+    });
+
     this.currentModal = modal;
 
     modal.show();
-
-    document.querySelector('.btn__confirm').addEventListener('click', () => {
-      this.resetGame();
-      modal.hide();
-      if (this.onRestart) this.onRestart();
-    });
   }
 
-  resetGame() {
-    this.missCounter = 0;
-    this.gameActive = true;
-    this.isModal = false;
-    for (const cell of this.cells) {
-      cell.innerHTML = '';
-    }
+  // resetGame() {
+  //   console.log('ОК');
+  //   this.missCounter = 0;
+  //   this.gameActive = true;
+  //   this.isModal = false;
+  //   for (const cell of this.cells) {
+  //     cell.innerHTML = '';
+  //   }
 
-    if (this.currentModal) {
-      this.currentModal.hide();
-      this.currentModal = null;
-    }
-  }
+  //   if (this.currentModal) {
+  //     this.currentModal.hide();
+  //     this.currentModal = null;
+  //   }
+  // }
 }
